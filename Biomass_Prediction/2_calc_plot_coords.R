@@ -6,7 +6,7 @@ DPI <- 300
 WIDTH <- 8.33
 HEIGHT <- 5.53
 
-plots <- read.csv("Biomass_Plots_UTM45N.csv")
+plots <- read.csv("Data/Biomass_Plots_UTM45N.csv")
 
 # Rename plot ID field to match the field name used in other code
 names(plots)[grep("ID_PLOT", names(plots))] <- "ID.Plot"
@@ -73,4 +73,4 @@ ggsave("plot_position_range.png", width=WIDTH, height=HEIGHT, dpi=DPI)
 qplot(center_Y_stderr$x, center_X_stderr$x, xlab="Easting Standard Error (meters)", ylab="Northing Standard Error (meters)")
 ggsave("plot_position_stderror.png", width=WIDTH, height=HEIGHT, dpi=DPI)
 
-write.csv(center_coords, file="averaged_plot_coordinates.csv", row.names=F)
+write.csv(center_coords, file="Data/averaged_plot_coordinates.csv", row.names=F)

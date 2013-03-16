@@ -7,7 +7,7 @@ DPI <- 300
 #HEIGHT <- 5.53
 WIDTH <- 6.5
 HEIGHT <- 4
-load("tree_data.Rdata")
+load("Data/tree_data.Rdata")
 
 trees <- cbind(trees, CBH=pi*trees$DBH)
 trees <- cbind(trees, basal_area=pi*(trees$DBH/2)^2)
@@ -56,7 +56,7 @@ names(plot_basal_area)[4] <- "basal_area"
 plot_results <- merge(plot_basal_area, plot_biomass)
 
 # Add the coordinates of each plot to the plot_results dataframe
-plot_locations <- read.csv("averaged_plot_coordinates.csv")
+plot_locations <- read.csv("Data/averaged_plot_coordinates.csv")
 plot_results <- merge(plot_results, plot_locations)
 
 qplot(basal_area, geom="histogram", data=plot_results,
@@ -89,6 +89,6 @@ qplot(ID.Row, basal_area, geom="boxplot", data=plot_results,
 ggsave("basal_area_row.png", width=WIDTH, height=HEIGHT, dpi=DPI)
 
 # Before saving, add in the zero biomass plots hand-digitized from the imagery.
-no_biomass_plots <- read.csv("Zero_Woody_Biomass_Plots.csv")
+no_biomass_plots <- read.csv("Data/Zero_Woody_Biomass_Plots.csv")
 plot_results <- rbind(no_biomass_plots, plot_results)
-write.csv(plot_results, file="processed_plot_results.csv", row.names=F)
+write.csv(plot_results, file="Data/processed_plot_results.csv", row.names=F)

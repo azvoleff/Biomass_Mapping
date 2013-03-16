@@ -9,17 +9,13 @@ DPI <- 300
 WIDTH <- 6.5
 HEIGHT <- 4
 
-#trees <- read.csv("D:/Data/Fall2009Survey/BiomassSampling/Trees.csv", skip=1)
-#canopy <- read.csv("D:/Data/Fall2009Survey/BiomassSampling/Canopy.csv", skip=1)
-trees <- read.csv("Trees.csv", skip=1)
-canopy <- read.csv("Canopy.csv", skip=1)
-#trees <- read.csv("~/Data/Fall2009Survey/BiomassSampling/Trees.csv", skip=1)
-#canopy <- read.csv("~/Data/Fall2009Survey/BiomassSampling/Canopy.csv", skip=1)
+trees <- read.csv("Data/Trees.csv", skip=1)
+canopy <- read.csv("Data/Canopy.csv", skip=1)
 
 trees$ID.Plot <- factor(trees$ID.Plot)
 trees$ID.Strata <- factor(trees$ID.Strata)
 trees$ID.Row <- factor(trees$ID.Row)
-save(trees, file="tree_data.Rdata")
+save(trees, file="Data/tree_data.Rdata")
 
 qplot(DBH, data=trees)
 ggsave("tree_dbh.png", width=WIDTH, height=HEIGHT, dpi=DPI)
@@ -44,7 +40,7 @@ ggsave("tree_dbh_row.png", width=WIDTH, height=HEIGHT, dpi=DPI)
 canopy$ID.Plot <- factor(canopy$ID.Plot)
 canopy$ID.Strata <- factor(canopy$ID.Strata)
 canopy$ID.Row <- factor(canopy$ID.Row)
-save(canopy, file="canopy_data.Rdata")
+save(canopy, file="Data/canopy_data.Rdata")
 
 qplot(ID.Strata, Overstory.Density, geom="boxplot", data=canopy)
 ggsave("canopy_density_strata.png", width=WIDTH, height=HEIGHT, dpi=DPI)
