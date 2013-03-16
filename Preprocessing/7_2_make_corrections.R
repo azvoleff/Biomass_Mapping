@@ -20,8 +20,8 @@ invariant_regions_folder <- "M:/Data/Nepal/Imagery/Biomass_Mapping/Invariant_reg
 invariant_regions_name <- "invariant_regions"
 invariant_regions <- readOGR(invariant_regions_folder, invariant_regions_name)
 
-indep_prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*2001.*[.]dat$"))
-dep_prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*2010.*[.]dat$"))
+indep_prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*2001.*[.]envi$"))
+dep_prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*2010.*[.]envi$"))
 if (length(indep_prefixes) != length(dep_prefixes)) {
     stop("length of indep_prefixes does not match length of dep_prefixes")
 }
@@ -32,8 +32,8 @@ for (image_num in 1:length(indep_prefixes)) {
     print("************************************************")
     print(paste("*****Building prediction models", dep_prefix, "from", indep_prefix))
 
-    indep_image <- brick(paste(input_path, "/", indep_prefix, '.dat', sep=""))
-    dep_image <- brick(paste(input_path, "/", dep_prefix, '.dat', sep=""))
+    indep_image <- brick(paste(input_path, "/", indep_prefix, '.envi', sep=""))
+    dep_image <- brick(paste(input_path, "/", dep_prefix, '.envi', sep=""))
 
     load(paste(input_path, "/", indep_prefix, "_invariant_pts.Rdata", sep=""))
     indep_pts <- invariant_pts

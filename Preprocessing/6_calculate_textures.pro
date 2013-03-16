@@ -25,7 +25,7 @@ FOR i=0L, (N_ELEMENTS(all_images)-1) DO BEGIN
   
   ; Calculate GLCM measures - note that kernel size (KX and KY) must be odd.
   ; If they are not ENVI will not give an error, but will not run.
-  glcm_out_name = output_path + PATH_SEP() + file_no_ext + "_glcm.dat"
+  glcm_out_name = output_path + PATH_SEP() + file_no_ext + "_glcm.envi"
   ;method = LONARR(8) + 1
   method = LONARR(8)
   method[0] = 1

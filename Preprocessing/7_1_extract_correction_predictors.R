@@ -20,10 +20,10 @@ for (prefix in prefixes) {
     print(paste("Processing", prefix))
     invariant_pts <- list()
     pb <- txtProgressBar(style=3)
-    layer_stack <- brick(paste(input_path, "/", prefix, '.dat', sep=""))
+    layer_stack <- brick(paste(input_path, "/", prefix, '.envi', sep=""))
     for (layer_num in 1:nlayers(layer_stack)) {
         setTxtProgressBar(pb, layer_num/nlayers(layer_stack))
-        this_raster <- raster(paste(input_path, "/", prefix, '.dat', sep=""), band=layer_num)
+        this_raster <- raster(paste(input_path, "/", prefix, '.envi', sep=""), band=layer_num)
         invariant_pts <- c(invariant_pts, list(extract(this_raster, invariant_regions)))
     }
     invariant_pts <- data.frame(matrix(unlist(invariant_pts), ncol=nlayers(layer_stack), byrow=T))
