@@ -3,8 +3,7 @@
 require(ggplot2)
 require(nnet)
 
-theme_update(theme_grey(base_size=24))
-theme_update(theme_grey(base_size=12))
+theme_set(theme_grey(base_size=12))
 update_geom_defaults("smooth", aes(size=1))
 update_geom_defaults("line", aes(size=1))
 
@@ -15,16 +14,18 @@ HEIGHT <- 5.67
 # Used to run a multiple regression to predict biomass from IKONOS 
 # multispectral data.
 
-load("neural_net_predictors_5x5_textures.Rdata")
+load("Data/2010_NDVI_texture_stats_predictors.Rdata")
 
 # Make a table of correlations
-cor_results <- round(cor(biomass_data)[1,],2)
-cor_tests <- c(1) # biomass is perfectly corelated with itself.
-for (variable in biomass_data[2:length(biomass_data)]) {
+# Note that the -2 below is to skip the plot ID column
+cor_results <- round(cor(biomass_data)[1,],2)[-2]
+cor_tests <- c(1) # biomass is perfectly correlated with itself.
+# Start from 3 in below loop to skip the Plot ID and biomass columns
+for (variable in biomass_data[3:length(biomass_data)]) {
     cor.signif <- cor.test(biomass_data$biomass, variable)$p.value
     cor_tests <- c(cor_tests, round(cor.signif,4))
 }
-write.csv(cbind(cor_results, cor_tests), file="cor_data_biomass_with_training.csv")
+write.csv(cbind(cor_results, cor_tests), file="Data/cor_data_biomass_with_training.csv")
 
 rescale <- function(data_matrix, starting_col=1) {
     for (col_num in starting_col:length(data_matrix)) {
@@ -54,7 +55,7 @@ rescale_band_math <- function(data_matrix, starting_col=1) {
     }
     return(band_math_exp)
 }
-write.csv(rescale_band_math(biomass_data, starting_col=2), file="rescale_band_math.txt", row.names=FALSE)
+write.csv(rescale_band_math(biomass_data, starting_col=2), file="Data/rescale_band_math.txt", row.names=FALSE)
 
 num_iter <- 1000
 saved_data <- biomass_data
