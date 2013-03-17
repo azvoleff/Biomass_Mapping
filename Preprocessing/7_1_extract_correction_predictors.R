@@ -13,7 +13,7 @@ invariant_regions_folder <- "M:/Data/Nepal/Imagery/Biomass_Mapping/Invariant_reg
 invariant_regions_name <- "invariant_regions"
 invariant_regions <- readOGR(invariant_regions_folder, invariant_regions_name)
 
-prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*(2001|2010).*[.]dat$"))
+prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*(2001|2010).*[.]envi$"))
 
 for (prefix in prefixes) {
     print("********************************")
