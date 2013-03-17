@@ -30,9 +30,9 @@ FOR i=0L, (N_ELEMENTS(bgrn_images)-1) DO BEGIN
   ENVI_DOIT, 'MATH_DOIT', FID=[fid, fid], POS=[2L, 3L], DIMS=dims, $
     EXP=ndvi_exp, OUT_NAME=ndvi_out_name, OUT_BNAME="NDVI", R_FID=ndvi_fid
   
-  ; Calculate EVI  
+  ; Calculate EVI
   evi_out_name = output_path + PATH_SEP() + year + "_EVI.envi"
-  evi_exp = '2.5*((float(b4) - float(b3)) / (float(b4) + 6.*float(b3) - 7.5*float(b1) + 1))'
+  evi_exp = '2.5*((float(b4) - float(b3)) / (float(b4) + 6.*float(b3) - 7.5*float(b1) + 1.))'
   ENVI_DOIT,'MATH_DOIT', FID=[fid, fid, fid], POS=[0L, 2L, 3L], DIMS=dims, $
     EXP=evi_exp, OUT_NAME=evi_out_name, OUT_BNAME="EVI", R_FID=evi_fid
   
