@@ -14,18 +14,7 @@ HEIGHT <- 5.67
 # Used to run a multiple regression to predict biomass from IKONOS 
 # multispectral data.
 
-load("Data/2010_NDVI_texture_stats_predictors.Rdata")
-
-# Make a table of correlations
-# Note that the -2 below is to skip the plot ID column
-cor_results <- round(cor(biomass_data)[1,],2)[-2]
-cor_tests <- c(1) # biomass is perfectly correlated with itself.
-# Start from 3 in below loop to skip the Plot ID and biomass columns
-for (variable in biomass_data[3:length(biomass_data)]) {
-    cor.signif <- cor.test(biomass_data$biomass, variable)$p.value
-    cor_tests <- c(cor_tests, round(cor.signif,4))
-}
-write.csv(cbind(cor_results, cor_tests), file="Data/cor_data_biomass_with_training.csv")
+load("Data/biomass_and_predictors.Rdata")
 
 rescale <- function(data_matrix, starting_col=1) {
     for (col_num in starting_col:length(data_matrix)) {
