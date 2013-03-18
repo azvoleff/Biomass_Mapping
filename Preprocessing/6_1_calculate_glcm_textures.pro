@@ -35,8 +35,12 @@ FOR input_folder_num=0L, (N_ELEMENTS(input_folders)-1) DO BEGIN
     ; Calculate GLCM measures - note that kernel size (KX and KY) must be odd.
     ; If they are not ENVI will not give an error, but will not run.
     glcm_out_name = output_path + PATH_SEP() + file_no_ext + "_glcm.envi"
-    method = LONARR(8) + 1
-    direction = [1,1]
+    method = LONARR(8)
+    ; Skip calculating the mean and variance (methods 0 and 1) as they are
+    ; identical to the mean and variance calculated by ENVIs
+    ; "TEXTURE_STATS_DOIT"
+    method[2:7] = 1
+    direction = [1, 1]
     g_levels = 64
     ENVI_DOIT, 'TEXTURE_COOCCUR_DOIT', FID=fid, POS=LINDGEN(nb), DIMS=dims, $
       METHOD=method, DIRECTION=direction, G_LEVELS=g_levels, KX=5, KY=5, $
