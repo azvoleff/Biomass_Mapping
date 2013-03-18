@@ -5,7 +5,7 @@ tic
 input_folders = ["D:\Biomass_Mapping\5_stacked", $
   "D:\Biomass_Mapping\6_vegetation_indices"]
 input_folders = ["D:\Biomass_Mapping\5_stacked"]
-output_path = "D:\Biomass_Mapping\7_textures"
+output_path = "D:\Biomass_Mapping\7_1_raw_co-occurrence_textures"
 
 ENVI, /restore_base_save_files
 ENVI_BATCH_INIT
@@ -14,7 +14,7 @@ FOR input_folder_num=0L, (N_ELEMENTS(input_folders)-1) DO BEGIN
   input_folder = input_folders[input_folder_num]
   PRINT, "***********************************************"
   PRINT, "Processing images from " + input_folder
-
+  
   input_folder_clock = TIC(input_folder)
   
   all_images = FILE_SEARCH(input_folder + PATH_SEP() + "*.envi")

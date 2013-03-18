@@ -33,7 +33,7 @@ FOR input_folder_num=0L, (N_ELEMENTS(input_folders)-1) DO BEGIN
     file_extension = STREGEX(file, "[.][a-zA-Z0-9]*$", /EXTRACT)
       file_no_ext = FILE_BASENAME(file, file_extension)
       
-    ; Calculate GLCM measures - note that kernel size (KX and KY) must be odd.
+    ; Calculate texture measures - note that kernel size (KX and KY) must be odd.
     ; If they are not ENVI will not give an error, but will not run.
     out_name = output_path + PATH_SEP() + file_no_ext + "_texture_stats.envi"
     method = LONARR(5) + 1
@@ -41,13 +41,12 @@ FOR input_folder_num=0L, (N_ELEMENTS(input_folders)-1) DO BEGIN
       METHOD=method, KX=5, KY=5, OUT_NAME=out_name, R_FID=r_fid
       
     toc, all_images_clock
-
+    
   ENDFOR
   
   toc, input_folder_clock
-
+  
 ENDFOR
-all_images = FILE_SEARCH(input_folder + PATH_SEP() + "*.envi")
 
 ENVI_BATCH_EXIT
 
