@@ -31,11 +31,12 @@ for (file in input_files) {
     name_root <- file_path_sans_ext(file)
     if (grepl('texture_stats', name_root)) {
         name_root <- gsub('texture_stats', '', name_root)
+        name_root <- paste("y", name_root, sep="")
         names(image_data) <- paste(name_root, c("range", "mean", "variance", "entropy", "skewness"), sep="")
     } else if (grepl('glcm', name_root)) {
         name_root <- gsub('glcm', '', name_root)
-        name_root <- paste(name_root, "glcm_", sep="")
-        names(image_data) <- paste(name_root, c("mean", "variance"), sep="")
+        name_root <- paste("y", name_root, "glcm_", sep="")
+        names(image_data) <- paste(name_root, c("mean", "variance", "homogeneity", "contrast", "dissimilarity", "entropy", "secondmoment", "correlation"), sep="")
     }
     biomass_data <- cbind(biomass_data, image_data)
 }
