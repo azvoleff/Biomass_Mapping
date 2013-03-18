@@ -7,16 +7,18 @@ require(ggplot2)
 require(raster)
 require(rgdal) # Required to read/write ENVI format
 
-NODATA_VALUE <- 0
+NODATA_VALUE <- -9999
 
 PLOT_WIDTH <- 8.33
 PLOT_HEIGHT <- 5.53
 DPI <- 300
 
-input_path <- "D:/Biomass_Mapping/7_textures"
-output_path <- "D:/Biomass_Mapping/8_corrected_layers_for_biomass_prediction"
+#input_path <- "D:/Workspace/Biomass_Mapping/7_textures"
+#output_path <- "D:/Workspace/Biomass_Mapping/8_corrected_layers_for_biomass_prediction"
+input_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
+output_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
 
-invariant_regions_folder <- "M:/Data/Nepal/Imagery/Biomass_Mapping/Invariant_regions"
+invariant_regions_folder <- "D:/Workspace/Biomass_Mapping/Invariant_regions"
 invariant_regions_name <- "invariant_regions"
 invariant_regions <- readOGR(invariant_regions_folder, invariant_regions_name)
 
@@ -24,6 +26,11 @@ indep_prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*2001.*[.]
 dep_prefixes <- file_path_sans_ext(list.files(input_path, pattern=".*2010.*[.]envi$"))
 if (length(indep_prefixes) != length(dep_prefixes)) {
     stop("length of indep_prefixes does not match length of dep_prefixes")
+}
+for (n in 1:length(indep_prefixes)) {
+    if (gsub("2001", "", indep_prefixes[n]) != gsub("2010", "", dep_prefixes[n])) {
+        stop("error - indep_prefixes and dep_prefixes are not aligned")
+    }
 }
 
 for (image_num in 1:length(indep_prefixes)) {
@@ -35,9 +42,9 @@ for (image_num in 1:length(indep_prefixes)) {
     indep_image <- brick(paste(input_path, "/", indep_prefix, '.envi', sep=""))
     dep_image <- brick(paste(input_path, "/", dep_prefix, '.envi', sep=""))
 
-    load(paste(input_path, "/", indep_prefix, "_invariant_pts.Rdata", sep=""))
+    load(paste("Data/", indep_prefix, "_invariant_pts.Rdata", sep=""))
     indep_pts <- invariant_pts
-    load(paste(input_path, "/", dep_prefix, "_invariant_pts.Rdata", sep=""))
+    load(paste("Data/", dep_prefix, "_invariant_pts.Rdata", sep=""))
     dep_pts <- invariant_pts
 
     lm_models <- list()
@@ -50,12 +57,12 @@ for (image_num in 1:length(indep_prefixes)) {
         print(summary(lm_model))
         qplot(indep_reflectance, dep_reflectance, data=df, xlab="2001 value", 
               ylab="2010 value")
-        ggsave(paste(input_path, "/", dep_prefix, "_VS_", indep_prefix, ".png", 
+        ggsave(paste("Data/", dep_prefix, "_VS_", indep_prefix, "_", band_num, ".png", 
                      sep=""), width=PLOT_WIDTH, height=PLOT_HEIGHT, 
                dpi=DPI)
         qplot(dep_reflectance, predict(lm_model), data=df, xlab="2010 observed", 
               ylab="2010 predicted")
-        ggsave(paste(input_path, "/", dep_prefix, "_VS_", indep_prefix, "_PREDICTED.png", 
+        ggsave(paste("Data/", dep_prefix, "_VS_", indep_prefix, "_", band_num, "_PREDICTED.png", 
                      sep=""), width=PLOT_WIDTH, height=PLOT_HEIGHT, 
                dpi=DPI)
     }
@@ -72,11 +79,12 @@ for (image_num in 1:length(indep_prefixes)) {
         this_dep_layer <- raster(dep_image, layer=layer_num)
         pb <- txtProgressBar(style=3)
         bs <- blockSize(this_dep_layer)
+
         for (block_num in 1:bs$n) {
             setTxtProgressBar(pb, block_num/bs$n)
             this_block <- getValues(this_dep_layer, row=bs$row[block_num], 
                                     nrows=bs$nrows[block_num])
-            valid_pos <- this_block != NODATA_VALUE & !is.na(this_block)
+            valid_pos <- (this_block != NODATA_VALUE) & (!is.na(this_block))
             indep_df <- data.frame(indep_reflectance=this_block[valid_pos])
             # Make a vector of nodata of the full row length.
             this_block_predictions <- rep(NODATA_VALUE, length(this_block))
