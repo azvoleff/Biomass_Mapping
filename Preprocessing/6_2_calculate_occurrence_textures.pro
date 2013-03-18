@@ -2,10 +2,9 @@ COMPILE_OPT idl2, hidden
 
 tic
 
-input_folders = ["D:\Biomass_Mapping\5_stacked", $
-  "D:\Biomass_Mapping\6_vegetation_indices"]
-input_folders = ["D:\Biomass_Mapping\5_stacked"]
-output_path = "D:\Biomass_Mapping\7_textures"
+input_folders = ["D:\Workspace\Biomass_Mapping\5_stacked", $
+  "D:\Workspace\Biomass_Mapping\6_vegetation_indices"]
+output_path = "D:\Workspace\Biomass_Mapping\7_2_textures"
 
 
 FOR input_folder_num=0L, (N_ELEMENTS(input_folders)-1) DO BEGIN
