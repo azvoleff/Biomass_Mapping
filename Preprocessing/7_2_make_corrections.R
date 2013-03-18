@@ -13,8 +13,8 @@ PLOT_WIDTH <- 8.33
 PLOT_HEIGHT <- 5.53
 DPI <- 300
 
-input_path <- "M:/Data/Nepal/Imagery/Biomass_Mapping/6_layers_for_biomass_prediction"
-output_path <- "M:/Data/Nepal/Imagery/Biomass_Mapping/7_corrected_layers_for_biomass_prediction"
+input_path <- "D:/Biomass_Mapping/7_textures"
+output_path <- "D:/Biomass_Mapping/8_corrected_layers_for_biomass_prediction"
 
 invariant_regions_folder <- "M:/Data/Nepal/Imagery/Biomass_Mapping/Invariant_regions"
 invariant_regions_name <- "invariant_regions"

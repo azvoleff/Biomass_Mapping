@@ -7,9 +7,9 @@ require(ggplot2)
 require(raster)
 require(rgdal) # Required to read/write ENVI format
 
-input_path <- "M:/Data/Nepal/Imagery/Biomass_Mapping/6_layers_for_biomass_prediction"
+input_path <- "D:/Biomass_Mapping/7_textures"
 
-invariant_regions_folder <- "M:/Data/Nepal/Imagery/Biomass_Mapping/Invariant_regions"
+invariant_regions_folder <- "D:/Biomass_Mapping/Invariant_regions"
 invariant_regions_name <- "invariant_regions"
 invariant_regions <- readOGR(invariant_regions_folder, invariant_regions_name)
 
