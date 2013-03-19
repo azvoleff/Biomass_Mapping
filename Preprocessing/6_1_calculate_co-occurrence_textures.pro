@@ -33,7 +33,7 @@ FOR input_folder_num=0L, (N_ELEMENTS(input_folders)-1) DO BEGIN
       
     ; Calculate GLCM measures - note that kernel size (KX and KY) must be odd.
     ; If they are not ENVI will not give an error, but will not run.
-    glcm_out_name = output_path + PATH_SEP() + file_no_ext + "_glcm.envi"
+    glcm_out_name = output_path + PATH_SEP() + file_no_ext + "_co-occurrence_texture.envi"
     method = LONARR(8)
     ; Skip calculating the mean and variance (methods 0 and 1) as they are
     ; identical to the mean and variance calculated by ENVIs
