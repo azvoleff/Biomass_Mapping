@@ -1,12 +1,12 @@
 library(raster)
 
-input_path <- "G:/Data/Nepal/Imagery/Biomass_Mapping/3_IDRISI_AtmosC_COST_corrected_RSTs"
-output_path <- "G:/Data/Nepal/Imagery/Biomass_Mapping/4_IDRISI_AtmosC_COST_corrected_Envi"
+input_path <- "D:/Workspace/Biomass_Mapping/3_IDRISI_AtmosC_COST_corrected_RSTs"
+output_path <- "D:/Workspace/Biomass_Mapping/4_IDRISI_AtmosC_COST_corrected_Envi"
 
-prefixes <- c("east_2001_bgrn_warp2pan_atmosc",
-              "east_2001_pan_warp2pan_atmosc",
-              "east_2010_bgrn_warp2pan_atmosc",
-              "east_2010_pan_nnortho_atmosc")
+prefixes <- c("EAST_20011030_BGRN_RPCORTHO_WARP_ATMOSC",
+              "EAST_20011030_PAN_RPCORTHO_WARP_ATMOSC",
+              "EAST_20100304_BGRN_RPCORTHO_ATMOSC",
+              "EAST_20100304_PAN_RPCORTHO_ATMOSC")
 
 for (prefix in prefixes) {
     print("********************************")
