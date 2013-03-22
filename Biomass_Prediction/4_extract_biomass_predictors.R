@@ -36,7 +36,7 @@ for (file in input_files) {
     } else if (grepl('glcm', name_root)) {
         name_root <- gsub('glcm', '', name_root)
         name_root <- paste("y", name_root, "glcm_", sep="")
-        names(image_data) <- paste(name_root, c("mean", "variance", "homogeneity", "contrast", "dissimilarity", "entropy", "secondmoment", "correlation"), sep="")
+        names(image_data) <- paste(name_root, c("homogeneity", "contrast", "dissimilarity", "entropy", "secondmoment", "correlation"), sep="")
     }
     biomass_data <- cbind(biomass_data, image_data)
 }
