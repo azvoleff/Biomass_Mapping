@@ -8,7 +8,8 @@ require(raster)
 require(rgdal) # Required to read/write ENVI format
 
 #input_path <- "D:/Biomass_Mapping/7_2_textures"
-input_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
+#input_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
+input_path <- "D:/Workspace/Biomass_Mapping/6_vegetation_indices"
 
 invariant_regions_folder <- "D:/Workspace/Biomass_Mapping/Invariant_regions"
 invariant_regions_name <- "invariant_regions"

@@ -15,8 +15,10 @@ DPI <- 300
 
 #input_path <- "D:/Workspace/Biomass_Mapping/7_textures"
 #output_path <- "D:/Workspace/Biomass_Mapping/8_corrected_layers_for_biomass_prediction"
-input_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
-output_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
+#input_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
+#output_path <- "D:/Workspace/Biomass_Mapping/NDVI_Differencing"
+input_path <- "D:/Workspace/Biomass_Mapping/6_vegetation_indices"
+output_path <- "D:/Workspace/Biomass_Mapping/6_vegetation_indices_corrected"
 
 invariant_regions_folder <- "D:/Workspace/Biomass_Mapping/Invariant_regions"
 invariant_regions_name <- "invariant_regions"
