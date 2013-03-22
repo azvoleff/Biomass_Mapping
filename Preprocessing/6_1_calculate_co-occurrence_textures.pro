@@ -3,7 +3,7 @@ COMPILE_OPT idl2, hidden
 tic
 
 input_folders = ["D:\Workspace\Biomass_Mapping\5_stacked", $
-  "D:\Workspace\Biomass_Mapping\6_vegetation_indices"]
+                 "D:\Workspace\Biomass_Mapping\6_vegetation_indices"]
 output_path = "D:\Workspace\Biomass_Mapping\7_1_raw_co-occurrence_textures"
 
 ENVI, /restore_base_save_files
