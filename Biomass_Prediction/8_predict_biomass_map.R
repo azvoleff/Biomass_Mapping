@@ -11,7 +11,7 @@ require(rgdal) # Required to read/write ENVI format
 NODATA_VALUE <- -1
 data_dir <- "G:/"
 
-theme_update(theme_grey(base_size=12))
+theme_set(theme_grey(base_size=12))
 update_geom_defaults("line", aes(size=1))
 DPI <- 300
 WIDTH <- 6.5

@@ -21,7 +21,6 @@ plots <- SpatialPointsDataFrame(coords, plots)
 proj4string(plots) <- "+proj=utm +zone=45 +ellps=WGS84 +units=m +no_defs"
 biomass_data <- data.frame(biomass=plots$biomass, PLOT_ID=plots$ID.Plot)
 
-
 for (file in input_files) {
     predictors <- brick(paste(input_dir, file, sep="/"))
 
