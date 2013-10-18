@@ -41,18 +41,21 @@ FOR i=0L, (N_ELEMENTS(files)-1) DO BEGIN
   str_pos = STREGEX(file, "[0-9]{4}", length=len)
   year = STRMID(file, str_pos, len)
   
+  str_pos = STREGEX(file, "(west)|(mid-west)|(mid-east)|(east)", length=len)
+  sector = STRMID(file, str_pos, len)
+    
   str_pos = STREGEX(file, "_bgrn_", length=len)
   is_bgrn = STRMID(file, str_pos, len)
   IF is_bgrn EQ '_bgrn_' THEN BEGIN
     PRINT, "Processing bgrn file " + file
     gains = bgrn_gains
     offsets = bgrn_offsets
-    radiance_out_name = output_folder + PATH_SEP() + year + "_bgrn_radiance.dat"
+    radiance_out_name = output_folder + PATH_SEP() + year + '_' + sector + "_bgrn_radiance.dat"
   ENDIF ELSE BEGIN
     PRINT, "Processing pan file " + file
     gains = pan_gains
     offsets = pan_offsets
-    radiance_out_name = output_folder + PATH_SEP() + year + "_pan_radiance.dat"
+    radiance_out_name = output_folder + PATH_SEP() + year + '_' + sector + "_pan_radiance.dat"
   ENDELSE
   
   ENVI_OPEN_FILE, file, R_FID=fid
@@ -83,9 +86,14 @@ FOR i=0L, (N_ELEMENTS(files)-1) DO BEGIN
   ENDELSE
   ENVI_WRITE_FILE_HEADER, r_fid
   
+  r_fid = 0
+  
+  ENVI_FILE_MNG, id=fid, /REMOVE
+  ENVI_FILE_MNG, id=r_fid, /REMOVE
+  ENVI_FILE_MNG, id=temp_fid, /REMOVE, /DELETE
 ENDFOR
 
-ENVI_BATCH_EXIT
+;ENVI_BATCH_EXIT
 
 TOC
 
